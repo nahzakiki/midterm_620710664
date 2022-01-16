@@ -119,75 +119,80 @@ class Pig_weight extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(40.0),
-              child: ElevatedButton(
-                  onPressed: () {
-                    var length_text = _lengthController.text;
-                    var girth_text = _girthController.text;
-                    double? length = double.tryParse(length_text);
-                    double? girth = double.tryParse(girth_text);
+            Expanded(
+              child: Align(
+                alignment: FractionalOffset.center,
+                child: Padding(
+                  padding: const EdgeInsets.all(40.0),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        var length_text = _lengthController.text;
+                        var girth_text = _girthController.text;
+                        double? length = double.tryParse(length_text);
+                        double? girth = double.tryParse(girth_text);
 
-                    if (length == null || girth == null) {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text("ERROR"),
-                            content: const Text("Invalid input"),
-                            actions: [
-                              // ปุ่ม OK ใน dialog
-                              TextButton(
-                                child: const Text('OK'),
-                                onPressed: () {
-                                  // ปิด dialog
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    } else {
-                      double weight =
-                          (girth / 100) * (girth / 100) * (length / 100) * 69.3;
-                      double price = weight * 112.50;
-                      double Tolerance_weight_max = (0.03 * weight) + weight;
-                      double Tolerance_price_max = (0.03 * price) + price;
-                      double Tolerance_weight_min = weight - (0.03 * weight);
-                      double Tolerance_price_min = price - (0.03 * price);
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Row(
-                                children: [
-                                  Image.asset('assets/images/ic_pig.png',
-                                      width: 30, height: 30),
-                                  Text('  RESULT'),
+                        if (length == null || girth == null) {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text("ERROR"),
+                                content: const Text("Invalid input"),
+                                actions: [
+                                  // ปุ่ม OK ใน dialog
+                                  TextButton(
+                                    child: const Text('OK'),
+                                    onPressed: () {
+                                      // ปิด dialog
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
                                 ],
-                              ),
-                            ),
-                            content: Text(
-                                'Weight: ${Tolerance_weight_min.round()} - ${Tolerance_weight_max.round()} kg\nPrice: ${Tolerance_price_min.round()} - ${Tolerance_price_max.round()} Baht'),
-                            actions: [
-                              // ปุ่ม OK ใน dialog
-                              TextButton(
-                                child: const Text('OK'),
-                                onPressed: () {
-                                  // ปิด dialog
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
+                              );
+                            },
                           );
-                        },
-                      );
-                    }
-                  },
-                  child: Text('CALCULATE')),
+                        } else {
+                          double weight =
+                              (girth / 100) * (girth / 100) * (length / 100) * 69.3;
+                          double price = weight * 112.50;
+                          double Tolerance_weight_max = (0.03 * weight) + weight;
+                          double Tolerance_price_max = (0.03 * price) + price;
+                          double Tolerance_weight_min = weight - (0.03 * weight);
+                          double Tolerance_price_min = price - (0.03 * price);
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Row(
+                                    children: [
+                                      Image.asset('assets/images/ic_pig.png',
+                                          width: 30, height: 30),
+                                      Text('  RESULT'),
+                                    ],
+                                  ),
+                                ),
+                                content: Text(
+                                    'Weight: ${Tolerance_weight_min.round()} - ${Tolerance_weight_max.round()} kg\nPrice: ${Tolerance_price_min.round()} - ${Tolerance_price_max.round()} Baht'),
+                                actions: [
+                                  // ปุ่ม OK ใน dialog
+                                  TextButton(
+                                    child: const Text('OK'),
+                                    onPressed: () {
+                                      // ปิด dialog
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
+                      },
+                      child: Text('CALCULATE')),
+                ),
+              ),
             ),
           ],
         ),
